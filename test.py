@@ -1,14 +1,12 @@
-class Dates:
-    def __init__(self, date):
-        self.date = date
-        
-    def getDate(self):
-        return self.date
+import functools
+import inspect
+from enum import Enum,IntEnum
 
-    @staticmethod
-    def toDashDate(date):
-        return date.replace("/", "-")
 
-dateFromDB = "15/12/2016"
-dateWithDash = Dates.toDashDate(dateFromDB)
-print(dateWithDash)
+class EnumClass(Enum):
+    ENTRY = 0
+    def ok(self):
+        return self.value
+    def __repr__(self):
+        return ok
+print(EnumClass.ENTRY.ok())

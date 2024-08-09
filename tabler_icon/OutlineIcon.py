@@ -1,4 +1,5 @@
 from enum import Enum
+from .convert import convert,TAILWIND_COLORS,Image
 
 class OutlineIcon(Enum):
     A_B_2 = 'a-b-2.svg'
@@ -4578,3 +4579,7 @@ class OutlineIcon(Enum):
     ZOOM = 'zoom.svg'
     ZZZ_OFF = 'zzz-off.svg'
     ZZZ = 'zzz.svg'
+    
+    def pixmap(self,size: int = 24,color :str = TAILWIND_COLORS.ZINC_900,stroke_width: float = 2.0) -> Image:
+        return convert(icon_path=self.value,icon_type="outline",size=size,color=color,stroke_width=stroke_width).toqpixmap()
+        

@@ -5,17 +5,14 @@ from PIL import Image
 with contextlib.redirect_stdout(None):  # Suppress import message
     import pygame
 from xml.etree import ElementTree
-from .OutlineIcon import OutlineIcon
-from .FilledIcon import FilledIcon
 from PySideComponent.tailwind_colors import TAILWIND_COLORS
-
-
 
 CURRENT_PATH = os.path.dirname(os.path.realpath(__file__)) 
 
 
 def convert(
-    icon: OutlineIcon | FilledIcon, 
+    icon_path:str,
+    icon_type:str ,
     size: int = 24,
     color :str = TAILWIND_COLORS.ZINC_900,
     stroke_width: float = 2.0
@@ -30,12 +27,12 @@ def convert(
     :return: specified Tabler icon as Pillow Image
     """
     # Open and read svg file for specified icon
-    if type(icon) == OutlineIcon:
+    if icon_type == "outline":
         color_attribute = 'stroke'
-        svg_path = CURRENT_PATH + '/svg/outline/' + icon.value
+        svg_path = CURRENT_PATH + '/svg/outline/' + icon_path
     else:
         color_attribute = 'fill'
-        svg_path = CURRENT_PATH + '/svg/filled/' + icon.value
+        svg_path = CURRENT_PATH + '/svg/filled/' + icon_path
         
     svg_string = open(svg_path, 'rt').read()
 
@@ -58,4 +55,4 @@ def convert(
     image_bytes = pygame.image.tobytes(svg_image, 'RGBA')
 
     # Return Image created from bytes
-    return Image.frombytes('RGBA', (size, size), image_bytes).toqpixmap()
+    return Image.frombytes('RGBA', (size, size), image_bytes)

@@ -2,7 +2,7 @@ from PySide6.QtWidgets import *
 from PySide6.QtCore import *
 from PySide6.QtGui import *
 import uuid
-from PySideComponent.tabler_icon import TablerIcons,OutlineIcon,FilledIcon
+from PySideComponent.tabler_icon import OutlineIcon,FilledIcon
 from PySideComponent.tailwind_colors import TAILWIND_COLORS
 from PySideComponent.components.button import Button
 from PySideComponent.components.typography import H4,P
@@ -17,6 +17,8 @@ class Alert(QWidget):
         warning = OutlineIcon.ALERT_TRIANGLE
         success = OutlineIcon.CHECKS
         danger = OutlineIcon.BUG
+        
+        
     def __init__(
             self,parent:QWidget=None, 
             title:str=None, 
@@ -26,7 +28,7 @@ class Alert(QWidget):
             closeBtn:bool=True,
             margin:int=10,
             postion:str='top-center',
-            duration:int=500,
+            duration:int=300,
         ):
         super(Alert, self).__init__(parent=parent)
         self._title = title
@@ -67,7 +69,7 @@ class Alert(QWidget):
             '}'
         )
         if self._closeBtn:
-            self.closeIcon = QIcon(TablerIcons.svgToQPixmap(icon=OutlineIcon.X, color=TAILWIND_COLORS.ZINC_500))
+            self.closeIcon = OutlineIcon.X.pixmap(color=TAILWIND_COLORS.ZINC_500)
             self.closeButton = Button(self.container,variant='ghost',icon=self.closeIcon,size='icon')
             self.closeButton.setFixedSize(24,24)
             self.closeButton.setIconSize(QSize(16,16))
@@ -84,7 +86,7 @@ class Alert(QWidget):
             self.alertIcon = self._icon
         else:
             self.iconPath = self.Icon[self._icon].value
-            self.alertIcon = TablerIcons.svgToQPixmap(icon=self.iconPath, color=TAILWIND_COLORS.ZINC_900)
+            self.alertIcon = self.iconPath.pixmap(color=TAILWIND_COLORS.ZINC_900,size=self._iconSize)
             
         self.iconLabel = QLabel()
         self.iconLabel.setPixmap(self.alertIcon)
@@ -190,8 +192,7 @@ class Alert(QWidget):
             alertIcon = icon
         else:
             iconPath = self.Icon[icon].value
-            alertIcon = TablerIcons.svgToQPixmap(icon=iconPath, color=TAILWIND_COLORS.ZINC_900)
-            
+            alertIcon = iconPath.pixmap(color=TAILWIND_COLORS.ZINC_900)
         self.titleLabel.setText(title)
         self.messageLabel.setText(message)
         self.iconLabel.setPixmap(alertIcon)
@@ -223,20 +224,19 @@ if __name__ == '__main__':
     window.setLayout(layout)
     layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
     
-    alert = Alert(window,postion='top-right',iconSize=100)
-    alert1 = Alert(window,postion='top-left')
+    alert = Alert(window,postion='top-right')
+    alert1 = Alert(window,postion='top-left',iconSize=100)
     alert2 = Alert(window,postion='bottom-right')
     alert3 = Alert(window,postion='bottom-left')
     alert4 = Alert(window,postion='top-center')
     alert5 = Alert(window,postion='bottom-center')
     
-    customerIcon = TablerIcons.svgToQPixmap(icon=FilledIcon.HEART,color=TAILWIND_COLORS.RED_500)
+    customerIcon = FilledIcon.HEART.pixmap(color=TAILWIND_COLORS.RED_500,size=100)
     title = 'Alert'
     message = 'Lo"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...'
     
     def pushAlert():
         alert(title=title,message=message,icon=customerIcon)
-        
     def pushAlert1():
         alert1.info(title=title,message=message)
     def pushAlert2():

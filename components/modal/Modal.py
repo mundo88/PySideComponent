@@ -6,8 +6,6 @@ from PySideComponent.components.dialog import Dialog
 from PySideComponent.components.button import Button
 
 
-
-
 class Modal(Dialog):
     def __init__(self,parent:QWidget=None, title:str="", message:str="",show = False):
         super(Modal, self).__init__(parent=parent,title=title, message=message,_show = show, closeBtn = False,outSideClose = False)

@@ -1,4 +1,6 @@
 from enum import Enum
+from .convert import convert,TAILWIND_COLORS,Image
+
 
 class FilledIcon(Enum):
     ACCESSIBLE = 'accessible.svg'
@@ -663,3 +665,5 @@ class FilledIcon(Enum):
     ZOOM = 'zoom.svg'
     
     
+    def pixmap(self,size: int = 24,color :str = TAILWIND_COLORS.ZINC_900,stroke_width: float = 2.0) -> Image:
+        return convert(icon_path=self.value,icon_type="fill",size=size,color=color,stroke_width=stroke_width).toqpixmap()

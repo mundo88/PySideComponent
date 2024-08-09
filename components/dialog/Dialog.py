@@ -3,7 +3,7 @@ from PySide6.QtCore import *
 from PySide6.QtGui import *
 import uuid
 from PySideComponent.components.button import Button
-from PySideComponent.tabler_icon import TablerIcons,OutlineIcon,FilledIcon
+from PySideComponent.tabler_icon import OutlineIcon,FilledIcon
 
 
 class Dialog(QWidget):
@@ -114,7 +114,7 @@ class Dialog(QWidget):
         return True
 
     def initCloseButton(self,e):
-        icon = QIcon(TablerIcons.svgToQPixmap(OutlineIcon.X))
+        icon = QIcon(OutlineIcon.X.pixmap())
         self.closeButton = Button(self,variant='ghost',size='icon',icon=icon)
         self.closeButton.setFixedSize(24,24)
         buttonSize = self.closeButton.size()

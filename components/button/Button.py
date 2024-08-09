@@ -4,7 +4,7 @@ from PySide6.QtCore import *
 import uuid
 from enum import Enum
 from PySideComponent.tailwind_colors import TAILWIND_COLORS
-from PySideComponent.tabler_icon import TablerIcons,OutlineIcon,FilledIcon
+from PySideComponent.tabler_icon import OutlineIcon,FilledIcon
 from PySideComponent.utils import QssParse
 from typing import Callable
 

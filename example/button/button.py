@@ -2,7 +2,7 @@ from PySideComponent.components import Button
 from PySideComponent.modules import *
 from PySideComponent.utils import QssParse
 from PySideComponent.tailwind_colors import TAILWIND_COLORS
-from PySideComponent.tabler_icon import TablerIcons,OutlineIcon,FilledIcon
+from PySideComponent.tabler_icon import OutlineIcon,FilledIcon
 
 class TestButton(QWidget):
     def __init__(self,parent:QWidget=None):
@@ -35,11 +35,11 @@ class TestButton(QWidget):
         linkButton = Button(self,variant="link",text='Link')
         layout.addWidget(linkButton)
         
-        emailIcon = QIcon(TablerIcons.svgToQPixmap(icon=OutlineIcon.MAIL, color=TAILWIND_COLORS.ZINC_050))
+        emailIcon = OutlineIcon.MAIL.pixmap(color=TAILWIND_COLORS.ZINC_050)
         button_with_icon=Button(self,variant='primary',text='Login With Email',icon=emailIcon)
         layout.addWidget(button_with_icon)
-        
-        icon = QIcon(TablerIcons.svgToQPixmap(icon=FilledIcon.MAIL, color=TAILWIND_COLORS.ZINC_900))
+    
+        icon = FilledIcon.MAIL.pixmap(color=TAILWIND_COLORS.ZINC_900)
         buttonOnlyIcon = Button(self,variant='outline',icon=icon,size='icon')
         layout.addWidget(buttonOnlyIcon)
         
